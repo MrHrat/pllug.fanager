@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Fanager.Class;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +23,18 @@ namespace Fanager
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ViewModel viewModel;
+
         public MainWindow()
         {
             InitializeComponent();
+            viewModel = new ViewModel();
+            DataContext = viewModel;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            viewModel.Initialize();
         }
     }
 }

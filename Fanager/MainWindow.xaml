@@ -4,9 +4,46 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fanager"
+        xmlns:localclass="clr-namespace:Fanager.Class"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="400" Width="600" Loaded="Window_Loaded">
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
         
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Header="New"></MenuItem>
+                <MenuItem Header="Open"></MenuItem>
+                <MenuItem Header="Save"></MenuItem>
+                <MenuItem Header="SaveAs..."></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Exit"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Undo"></MenuItem>
+                <MenuItem Header="Redo"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Cut"></MenuItem>
+                <MenuItem Header="Copy"></MenuItem>
+                <MenuItem Header="Paste"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1">
+            <TreeView ItemsSource="{Binding Folders}" Width="250">
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type localclass:Folder}" ItemsSource="{Binding Children}">
+                        <TextBlock Text="{Binding Path=FolderLabel}" />
+                    </HierarchicalDataTemplate>
+                    <DataTemplate DataType="{x:Type localclass:File}" >
+                        <TextBlock Text="{Binding Path=FolderLabel}" />
+                    </DataTemplate>
+                </TreeView.Resources>
+            </TreeView>
+        </StackPanel>        
     </Grid>
 </Window>
